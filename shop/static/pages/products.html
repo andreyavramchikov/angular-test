@@ -1,3 +1,4 @@
+<a class="btn btn-success" href="#product">Add</a>
 <div id="products" class="row list-group">
     <div id="[[product.id]]" class="item col-xs-4 col-lg-4" ng-repeat="product in products">
         <div class="thumbnail">
@@ -13,7 +14,6 @@
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <a class="btn btn-success" href="#product/[[product.id]]">Edit</a>
-                        <a class="btn btn-success" href="#product">Add</a>
                         <a class="btn btn-success" ng-click="deleteProduct(product.id)">Delete</a>
                     </div>
                 </div>
