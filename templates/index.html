@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head lang="en">
+<meta charset="UTF-8">
+    <base href="/">
+    {% block scripts %}
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+
+        <script src="{% static "js/app.js" %}"></script>
+        <script src="{% static "js/services/ProductService.js" %}"></script>
+        <script src="{% static "js/controllers/MainController.js" %}"></script>
+        <script src="{% static "js/controllers/ProductController.js" %}"></script>
+
+        <link href="{% static "css/app.css" %}" rel="stylesheet">
+    {% endblock %}
+
+    <title>Main</title>
+
+</head>
+
+<body ng-controller="MainController">
+    <div id="main">
+        <div ng-view></div>
+    </div>
+</body>
+</html>

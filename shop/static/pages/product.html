@@ -1,0 +1,42 @@
+<div class="item">
+    <form id="product-form" name="ProductForm" class="col-md-4" ng-submit="ProductForm.$valid && createupdateProduct()">
+        <div class="thumbnail">
+            <img class="group list-group-image" ng-src="[[product.image_url]]" alt=""/>
+
+            <div class="input-group col-sm-7">
+                <select ng-model='product.category' class="form-control"
+                        ng-options="category.id as category.name for category in categories">
+                </select>
+            </div>
+
+            <label class="control-label col-sm-5" for="name"><i class="icon-envelope"></i> Name:  </label>
+            <div class="input-group col-sm-7">
+                <input name='name' ng-model="product.name" required class="form-control" placeholder="name">
+                <span class="help-block" ng-show="ProductForm.name.$error.required">Required</span>
+            </div>
+
+            <label class="control-label col-sm-5" for="description"><i class="icon-envelope"></i> Description:  </label>
+            <div class="input-group col-sm-7">
+                <input name='description'
+                       ng-model="product.description" required
+                       ng-minlength="11"
+                       class="form-control"
+                       placeholder="description">
+                <span ng-show="ProductForm.description.$error.minlength" class="help-inline" >should be minimum 11 character</span>
+            </div>
+
+            <label class="control-label col-sm-5" for="cost"><i class="icon-envelope"></i> Cost:  </label>
+            <div class="input-group col-sm-7">
+                <input name='cost' type="number"
+                       ng-model="product.cost"
+                       required
+                       class="form-control"
+                       placeholder="cost">
+            </div>
+
+            <input type="submit" class="btn pull-right" value="[[product.id ? 'Update' : 'Create']]" />
+        </div>
+    </form>
+</div>
+
+

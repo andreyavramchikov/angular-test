@@ -1,0 +1,371 @@
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (i686)
+--
+-- Host: localhost    Database: store
+-- ------------------------------------------------------
+-- Server version	5.5.40-0ubuntu0.12.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `group_id` (`group_id`,`permission_id`),
+  KEY `auth_group_permissions_0e939a4f` (`group_id`),
+  KEY `auth_group_permissions_8373b171` (`permission_id`),
+  CONSTRAINT `auth_group_permissions_group_id_58c48ba9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_group_permissi_permission_id_23962d04_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `content_type_id` (`content_type_id`,`codename`),
+  KEY `auth_permission_417f1b1c` (`content_type_id`),
+  CONSTRAINT `auth_permissi_content_type_id_51277a81_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add permission',2,'add_permission'),(5,'Can change permission',2,'change_permission'),(6,'Can delete permission',2,'delete_permission'),(7,'Can add group',3,'add_group'),(8,'Can change group',3,'change_group'),(9,'Can delete group',3,'delete_group'),(10,'Can add user',4,'add_user'),(11,'Can change user',4,'change_user'),(12,'Can delete user',4,'delete_user'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add product',7,'add_product'),(20,'Can change product',7,'change_product'),(21,'Can delete product',7,'delete_product'),(22,'Can add category',8,'add_category'),(23,'Can change category',8,'change_category'),(24,'Can delete category',8,'delete_category');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime NOT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(75) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$xhexwwEGdFug$5Lh91SUV7bpQeLMnFmnYI6kc9EtPjheXwia4/0CyC5g=','2015-03-06 09:13:36',1,'admin','','','aldrson@gmail.com',1,1,'2015-01-13 16:31:24');
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`group_id`),
+  KEY `auth_user_groups_e8701ad4` (`user_id`),
+  KEY `auth_user_groups_0e939a4f` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_30a071c9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_24702650_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permissions_e8701ad4` (`user_id`),
+  KEY `auth_user_user_permissions_8373b171` (`permission_id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_7cd7acb6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `auth_user_user_perm_permission_id_3d7071f0_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_417f1b1c` (`content_type_id`),
+  KEY `django_admin_log_e8701ad4` (`user_id`),
+  CONSTRAINT `django_admin_log_user_id_1c5f563_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `django_admin__content_type_id_5151027a_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_admin_log`
+--
+
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_3ec8c61c_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'log entry','admin','logentry'),(2,'permission','auth','permission'),(3,'group','auth','group'),(4,'user','auth','user'),(5,'content type','contenttypes','contenttype'),(6,'session','sessions','session'),(7,'product','shop','product'),(8,'category','shop','category');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_migrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (6,'contenttypes','0001_initial','2015-03-04 09:03:11'),(7,'auth','0001_initial','2015-03-04 09:03:11'),(8,'admin','0001_initial','2015-03-04 09:03:11'),(9,'sessions','0001_initial','2015-03-04 09:03:11'),(10,'shop','0001_initial','2015-03-04 09:03:36'),(11,'shop','0002_auto_20150304_1041','2015-03-04 10:41:31'),(12,'shop','0003_auto_20150304_1043','2015-03-04 10:43:54');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_de54fa62` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_session`
+--
+
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('gzw4o5wzzzdetus1wwt8afzd7qdeeth6','MDVkMjE1ZWQxMzdlZDM0ZWZlZWYwMWExOTZhNDVmN2NjYjEzZjYyNjp7Il9hdXRoX3VzZXJfaGFzaCI6ImZhYmVlZWUyMjRlNDliZmI4OGI5MGFiNDk5OTQ2YmQ2YjFkZDNhNjAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9','2015-03-20 09:13:36'),('uyl1xhbhio7c6gwjzh3knyozc0bukhed','MDVkMjE1ZWQxMzdlZDM0ZWZlZWYwMWExOTZhNDVmN2NjYjEzZjYyNjp7Il9hdXRoX3VzZXJfaGFzaCI6ImZhYmVlZWUyMjRlNDliZmI4OGI5MGFiNDk5OTQ2YmQ2YjFkZDNhNjAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9','2015-01-28 10:47:18');
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shop_category`
+--
+
+DROP TABLE IF EXISTS `shop_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shop_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `shop_category_name_4f7be482_uniq` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shop_category`
+--
+
+LOCK TABLES `shop_category` WRITE;
+/*!40000 ALTER TABLE `shop_category` DISABLE KEYS */;
+INSERT INTO `shop_category` VALUES (26,'Boys Classics'),(25,'Classics'),(18,'CrossFit'),(2,'Fitness & Training'),(24,'Girls Classics'),(3,'Girls Running'),(23,'Girls Tennis'),(27,'Infants Classics'),(20,'Men'),(19,'Men Basketball'),(17,'Men Classics'),(7,'Men CrossFit'),(5,'Men Fitness & Training'),(8,'Men Running'),(16,'Men Studio'),(22,'Men Swimming'),(13,'Men Walking'),(15,'Running'),(14,'Women'),(28,'Women Classics'),(1,'Women CrossFit'),(11,'Women Dance'),(9,'Women Fitness & Training'),(10,'Women Running'),(6,'Women Studio'),(4,'Women Walking'),(12,'Women Yoga'),(21,'Yoga');
+/*!40000 ALTER TABLE `shop_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shop_product`
+--
+
+DROP TABLE IF EXISTS `shop_product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shop_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` longtext NOT NULL,
+  `date_added` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `cost` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `shop_product_b583a629` (`category_id`),
+  CONSTRAINT `shop_product_category_id_381b052e_fk_shop_category_id` FOREIGN KEY (`category_id`) REFERENCES `shop_category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5691 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shop_product`
+--
+
+LOCK TABLES `shop_product` WRITE;
+/*!40000 ALTER TABLE `shop_product` DISABLE KEYS */;
+INSERT INTO `shop_product` VALUES (4620,'Disney Frozen Anna Long Hoody','Description','2015-03-05 13:46:22','2015-05-06 15:06:14',1,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/Z94917_01.jpg?sw=230&sfrm=jpg',24),(4621,'Disney Frozen Elsa Hoody','','2015-03-05 13:46:22','2015-03-05 13:46:22',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/Z94935_01.jpg?sw=230&sfrm=jpg',24),(4622,'Disney Frozen Anna Tee','','2015-03-05 13:46:22','2015-03-05 13:46:22',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/Z94933_01.jpg?sw=230&sfrm=jpg',24),(4623,'Disney Frozen Anna Legging','111111111111112','2015-03-05 13:46:23','2015-05-06 15:01:47',123,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/Z95205_01.jpg?sw=230&sfrm=jpg',24),(4624,'Reebok Z Electrify','','2015-03-05 13:46:23','2015-03-05 13:46:23',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/M43975_01.jpg?sw=230&sfrm=jpg',3),(4625,'Kid\'s Freestyle Hi','','2015-03-05 13:46:23','2015-03-05 13:46:23',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/50141_01.jpg?sw=230&sfrm=jpg',24),(4626,'Kids SH 311','','2015-03-05 13:46:23','2015-03-05 13:46:23',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V46511_01.jpg?sw=230&sfrm=jpg',24),(4627,'Ksee You Mid','','2015-03-05 13:46:23','2015-03-05 13:46:23',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V60831_01.jpg?sw=230&sfrm=jpg',25),(4628,'Classic Leather','','2015-03-05 13:46:23','2015-03-05 13:46:23',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/50151_01.jpg?sw=230&sfrm=jpg',26),(4629,'Kids SH 311','','2015-03-05 13:46:23','2015-03-05 13:46:23',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V46507_01.jpg?sw=230&sfrm=jpg',25),(4630,'Disney Frozen Runner 2V','1111111111','2015-03-05 13:46:24','2015-05-04 15:09:37',111111111,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/M42617_01.jpg?sw=230&sfrm=jpg',20),(4631,'Kids Freestyle Hi','','2015-03-05 13:46:24','2015-03-05 13:46:24',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V56230_01.jpg?sw=230&sfrm=jpg',24),(4632,'Reebok Royal Glide','','2015-03-05 13:46:24','2015-03-05 13:46:24',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V59747_01.jpg?sw=230&sfrm=jpg',24),(4633,'Reebok Royal Glide','','2015-03-05 13:46:24','2015-03-05 13:46:24',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V59743_01.jpg?sw=230&sfrm=jpg',26),(4634,'Kids Classic Solid Court 3V','','2015-03-05 13:46:24','2015-03-05 13:46:24',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V45271_01.jpg?sw=230&sfrm=jpg',26),(4635,'Allygreen','','2015-03-05 13:46:24','2015-03-05 13:46:24',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55877_01.jpg?sw=230&sfrm=jpg',24),(4636,'Reebok Ventureflex Sandal','','2015-03-05 13:46:24','2015-03-05 13:46:24',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55707_01.jpg?sw=230&sfrm=jpg',27),(4637,'Premium Vulc II','','2015-03-05 13:46:24','2015-03-05 13:46:24',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V59287_01.jpg?sw=230&sfrm=jpg',26),(4638,'Kids Freestyle Hi','','2015-03-05 13:46:25','2015-03-05 13:46:25',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/J93535_01.jpg?sw=230&sfrm=jpg',24),(4639,'Disney Frozen Court Mid','','2015-03-05 13:46:25','2015-03-05 13:46:25',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/M42665_01.jpg?sw=230&sfrm=jpg',23),(4640,'GL 1500','','2015-03-05 13:46:25','2015-03-05 13:46:25',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/M42441_01.jpg?sw=230&sfrm=jpg',3),(4641,'Classic Leather','','2015-03-05 13:46:25','2015-03-05 13:46:25',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/M40254_01.jpg?sw=230&sfrm=jpg',26),(4642,'Women\'s Reebok Royal Classic Rayen','','2015-03-05 13:47:09','2015-03-05 13:47:09',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V48622_01.jpg?sw=230&sfrm=jpg',28),(4643,'Women\'s Vulc Boot','','2015-03-05 13:47:09','2015-03-05 13:47:09',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V48413_01.jpg?sw=230&sfrm=jpg',28),(4644,'Freestyle Hi Boot','','2015-03-05 13:47:09','2015-03-05 13:47:09',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V48524_01.jpg?sw=230&sfrm=jpg',28),(4645,'Princess','','2015-03-05 13:47:09','2015-03-05 13:47:09',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/j95361_01.jpg?sw=230&sfrm=jpg',28),(4646,'Exofit Lo Clean Logo Int','','2015-03-05 13:47:09','2015-03-05 13:47:09',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/R524822_01.jpg?sw=230&sfrm=jpg',17),(4647,'Workout Plus','','2015-03-05 13:47:09','2015-03-05 13:47:09',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/2760_01.jpg?sw=230&sfrm=jpg',17),(4648,'Women\'s Freestyle Hi Italy','','2015-03-05 13:47:09','2015-03-05 13:47:09',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/v52775_01.jpg?sw=230&sfrm=jpg',28),(4649,'Pump Running Dual Cordura®','','2015-03-05 13:47:10','2015-03-05 13:47:10',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V60088_01.jpg?sw=230&sfrm=jpg',17),(4650,'Pump Omni Ultralite','','2015-03-05 13:47:10','2015-03-05 13:47:10',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/J92216_02.jpg?sw=230&sfrm=jpg',17),(4651,'Court Victory Pump','','2015-03-05 13:47:10','2015-03-05 13:47:10',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/M43149_01.jpg?sw=230&sfrm=jpg',25),(4652,'GL 2620','','2015-03-05 13:47:10','2015-03-05 13:47:10',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/M41513_01.jpg?sw=230&sfrm=jpg',17),(4653,'Court Victory Pump Cord','','2015-03-05 13:47:10','2015-03-05 13:47:10',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/M42811_01.jpg?sw=230&sfrm=jpg',25),(4654,'AK Wedge','','2015-03-05 13:47:10','2015-03-05 13:47:10',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/v51924_01.jpg?sw=230&sfrm=jpg',28),(4655,'Classic Leather Lux','','2015-03-05 13:47:10','2015-03-05 13:47:10',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55144_01.jpg?sw=230&sfrm=jpg',17),(4656,'Exofit Hi FVS','','2015-03-05 13:47:10','2015-03-05 13:47:10',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55172_01.jpg?sw=230&sfrm=jpg',17),(4657,'ERS 1500','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55219_01.jpg?sw=230&sfrm=jpg',17),(4658,'GL 6000 Athletic','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55226_01.jpg?sw=230&sfrm=jpg',17),(4659,'Ventilator','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55114_01.jpg?sw=230&sfrm=jpg',17),(4660,'BB4600 Hi','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55301_01.jpg?sw=230&sfrm=jpg',17),(4661,'Workout Mid','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55653_01.jpg?sw=230&sfrm=jpg',28),(4662,'BB7700 Mid Bling','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55626_01.jpg?sw=230&sfrm=jpg',28),(4663,'Fabulista Mid II','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55993_01.jpg?sw=230&sfrm=jpg',28),(4664,'Plimton','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55461_01.jpg?sw=230&sfrm=jpg',17),(4665,'Classic Leather Embossed Camo','','2015-03-05 13:47:11','2015-03-05 13:47:11',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V59903_01.jpg?sw=230&sfrm=jpg',17),(4666,'Royal Complete','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V59484_01.jpg?sw=230&sfrm=jpg',17),(4667,'Royal Complete','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V59485_01.jpg?sw=230&sfrm=jpg',17),(4668,'Pump Omni Lite Vintage','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V60184_01.jpg?sw=230&sfrm=jpg',25),(4669,'Princess 30Th','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V60201_01.jpg?sw=230&sfrm=jpg',28),(4670,'Kamikaze II Mid','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V61152_01.jpg?sw=230&sfrm=jpg',17),(4671,'Freestyle Hi x Patrick Mohr','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V61159_F.jpg.jpg?sw=230&sfrm=jpg',28),(4672,'Kamikaze II Mid','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V61434_01.jpg?sw=230&sfrm=jpg',17),(4673,'Alicia Keys Wedge','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V60906_01.jpg?sw=230&sfrm=jpg',28),(4674,'Pump AXT x Stash','','2015-03-05 13:47:12','2015-03-05 13:47:12',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V61564_01.jpg?sw=230&sfrm=jpg',17),(4675,'Fleece Pant','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/Z82837_01.jpg?sw=230&sfrm=jpg',17),(4676,'NPC Pop','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55376_01.jpg?sw=230&sfrm=jpg',17),(4677,'Women\'s Classic Nylon Slim Monocolor','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V48310_01.jpg?sw=230&sfrm=jpg',28),(4678,'Freestyle Hi Suede','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V48593_01.jpg?sw=230&sfrm=jpg',28),(4679,'Classic Leather','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/2214_01.jpg?sw=230&sfrm=jpg',17),(4680,'Men\'s SL Flip','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V53313_01.jpg?sw=230&sfrm=jpg',17),(4681,'Pump Omni Lite','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V53790_01.jpg?sw=230&sfrm=jpg',25),(4682,'Men\'s Ex-O-Fit Hi Clean Fitness','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/v52776_01.jpg?sw=230&sfrm=jpg',17),(4683,'Women\'s Fabulista','','2015-03-05 13:47:13','2015-03-05 13:47:13',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/v53254_01.jpg?sw=230&sfrm=jpg',28),(4684,'Classic Jam','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V60420_01.jpg?sw=230&sfrm=jpg',17),(4685,'Reebok Royal Deck','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/j98996_01.jpg?sw=230&sfrm=jpg',17),(4686,'Pump Fury Cordura','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V52388_01.jpg?sw=230&sfrm=jpg',25),(4687,'AK Wedge','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/v51927_01.jpg?sw=230&sfrm=jpg',28),(4688,'NPC FVS','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55168_01.jpg?sw=230&sfrm=jpg',17),(4689,'Princess Vintage Inspired','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55112_01.jpg?sw=230&sfrm=jpg',28),(4690,'Reefunk II','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55776_01.jpg?sw=230&sfrm=jpg',28),(4691,'BB7700 Mid','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55774_01.jpg?sw=230&sfrm=jpg',28),(4692,'NPC FVS','','2015-03-05 13:47:14','2015-03-05 13:47:14',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55316_01.jpg?sw=230&sfrm=jpg',17),(4693,'Men\'s AO Pump Side','','2015-03-05 13:47:15','2015-03-05 13:47:15',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55569_01.jpg?sw=230&sfrm=jpg',17),(4694,'Kamikaze I Mid','','2015-03-05 13:47:15','2015-03-05 13:47:15',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V56110_01.jpg?sw=230&sfrm=jpg',17),(4695,'Blacktop Battleground','','2015-03-05 13:47:15','2015-03-05 13:47:15',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V56091_01.jpg?sw=230&sfrm=jpg',17),(4696,'Classic Leather Utility','','2015-03-05 13:47:15','2015-03-05 13:47:15',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55386_01.jpg?sw=230&sfrm=jpg',17),(4697,'Plimton','','2015-03-05 13:47:15','2015-03-05 13:47:15',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55462_01.jpg?sw=230&sfrm=jpg',17),(4698,'BB7700 Mid','','2015-03-05 13:47:15','2015-03-05 13:47:15',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V55773_01.jpg?sw=230&sfrm=jpg',28),(4699,'Kamikaze I Mid','','2015-03-05 13:47:15','2015-03-05 13:47:15',0,1,'http://demandware.edgesuite.net/sits_pod27/dw/image/v2/AAJP_PRD/on/demandware.static/Sites-Reebok-INT-Site/Sites-reebok-products/en_IT/v1425533808161/zoom/V60364_01.jpg?sw=230&sfrm=jpg',17),(5690,'Name','12312222222222','2015-05-06 14:58:18','2015-05-06 14:59:13',1,1,'',17);
+/*!40000 ALTER TABLE `shop_product` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-05-06 18:23:55
